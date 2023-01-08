@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-author-table.yaml
+
+  #TODO сперва сделать ченджсет на книги, и потом создать уже таблицу с данными
+  #- include:
+   #    file: db/changelog/changeset/author-dataset.yaml
