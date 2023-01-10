@@ -1,13 +1,14 @@
 spring:
+  liquibase:
+    clear-checksums: true
+    change-log: db/changelog/changelog.yaml
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: update
     database-platform: org.hibernate.dialect.MySQLDialect
+    database: mysql
+    hibernate:
+      ddl-auto: none
   datasource:
     username: root
     password: test
-    url: jdbc:mysql://localhost:3306/mydb
-
-#validation:
-  #max-age: 100
+    url: jdbc:mysql://localhost:3306/crud_db

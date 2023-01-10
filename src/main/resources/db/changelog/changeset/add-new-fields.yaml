@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: adding-new-fields
+      author: vadim
+      changes:
+        - addColumn:
+            tableName: book
+            columns:
+              - column:
+                  name: page_amount
+                  type: int
+                  constraints:
+                    nullable: true
+              - column:
+                  name: year
+                  type: int
+                  constraints:
+                    nullable: true

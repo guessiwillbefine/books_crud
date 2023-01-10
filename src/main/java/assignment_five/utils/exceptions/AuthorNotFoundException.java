@@ -1,4 +1,4 @@
-package assignment_five.utils;
+package assignment_five.utils.exceptions;
 
 public class AuthorNotFoundException extends AuthorException {
     public AuthorNotFoundException(String msg) {

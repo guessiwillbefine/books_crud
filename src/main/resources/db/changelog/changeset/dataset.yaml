@@ -1,0 +1,275 @@
+databaseChangeLog:
+  - changeSet:
+      id: book-author-dataset
+      author: vadim
+      changes:
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'Umberto'
+              - column:
+                  name: surname
+                  value: 'Eco'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The Name of Rose'
+              - column:
+                  name: description
+                  value: "The year is 1327. Benedictines in a wealthy Italian abbey are suspected of heresy, and Brother William of Baskerville arrives to investigate. When his delicate mission is suddenly overshadowed by seven bizarre deaths, Brother William turns detective. His tools are the logic of Aristotle, the theology of Aquinas, the empirical insights of Roger Bacon—all sharpened to a glistening edge by wry humor and a ferocious curiosity."
+              - column:
+                  name: page_amount
+                  value: '549'
+              - column:
+                  name: year
+                  value: '1980'
+              - column:
+                  name: author_id
+                  value: '1'
+
+        - insert:
+                tableName: book
+                columns:
+                  - column:
+                      name: name
+                      value: 'Foucault''s pendulum'
+                  - column:
+                      name: description
+                      value: "Bored with their work, three Milanese editors cook up “the Plan,” a hoax that connects the medieval Knights Templar with other occult groups from ancient to modern times. This produces a map indicating the geographical point from which all the powers of the earth can be controlled—a point located in Paris, France, at Foucault’s Pendulum. "
+                  - column:
+                      name: year
+                      value: '1988'
+                  - column:
+                      name: page_amount
+                      value: '834'
+                  - column:
+                      name: author_id
+                      value: '1'
+        - insert:
+                tableName: book
+                columns:
+                  - column:
+                      name: name
+                      value: 'Prague cemetery'
+                  - column:
+                      name: description
+                      value: "19th-century Europe abounds with the ghastly and the mysterious. Italian republicans strangle priests with their own intestines. French criminals plan bombings by day and celebrate Black Masses at night. Every nation has its own secret service, perpetrating forgeries. From the unification of Italy to the Paris Commune, Europe is in tumult and everyone needs a scapegoat. But what if lay one lone man? What if that evil genius created its most infamous document?"
+                  - column:
+                      name: year
+                      value: '2010'
+                  - column:
+                      name: author_id
+                      value: '1'
+
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'Haruki'
+              - column:
+                  name: surname
+                  value: 'Murakami'
+              - column:
+                  name: age
+                  value: '73'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'Norwegian Wood'
+              - column:
+                  name: description
+                  value: "A magnificent blending of the music, the mood, and the ethos that was the sixties with the story of one college student's romantic coming of age, Norwegian Wood brilliantly recaptures a young man's first, hopeless, and heroic love."
+              - column:
+                  name: year
+                  value: '1987'
+              - column:
+                  name: author_id
+                  value: '2'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'Chronicle Wind Up Bird'
+              - column:
+                  name: description
+                  value: "Japan's most highly regarded novelist now vaults into the first ranks of international fiction writers with this heroically imaginative novel, which is at once a detective story, an account of a disintegrating marriage, and an excavation of the buried secrets of World War II."
+              - column:
+                  name: year
+                  value: '1994'
+              - column:
+                  name: page_amount
+                  value: '624'
+              - column:
+                  name: author_id
+                  value: '2'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'Kafka on the Shore'
+              - column:
+                  name: description
+                  value: "Kafka on the Shore, a tour de force of metaphysical reality, is powered by two remarkable characters: a teenage boy, Kafka Tamura, who runs away from home either to escape a gruesome oedipal prophecy or to search for his long-missing mother and sister; and an aging simpleton called Nakata, who never recovered from a wartime affliction and now is drawn toward Kafka for reasons that, like the most basic activities of daily life, he cannot fathom."
+              - column:
+                  name: year
+                  value: '2002'
+              - column:
+                  name: page_amount
+                  value: '514'
+              - column:
+                  name: author_id
+                  value: '2'
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'Chuck'
+              - column:
+                  name: surname
+                  value: 'Palahniuk'
+              - column:
+                  name: age
+                  value: '60'
+
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'John Ronald'
+              - column:
+                  name: surname
+                  value: 'Tolkien'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The Fellowship Of The Ring'
+              - column:
+                  name: description
+                  value: "This is the first part of Tolkien’s epic masterpiece, «The Lord of the Rings», featuring a striking black cover based on Tolkien’s own design, the definitive text, and a detailed map of Middle-earth. Sauron, the Dark Lord, has gathered to him all the Rings of Power — the means by which he intends to rule Middle-earth. All he lacks in his plans for dominion is the One Ring — the ring that rules them all — which has fallen into the hands of the hobbit, Bilbo Baggins."
+              - column:
+                  name: year
+                  value: '1954'
+              - column:
+                  name: page_amount
+                  value: '448'
+              - column:
+                  name: author_id
+                  value: '4'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The Two Towers'
+              - column:
+                  name: description
+                  value: "The Fellowship is scattered. Some brace hopelessly for war against the ancient evil of Sauron. Others must contend with the treachery of the wizard Saruman. Only Frodo and Sam are left to take the One Ring, ruler of the accursed Rings of Power, to be destroyed in Mordor, the dark realm where Sauron is supreme. Their guide is Gollum, deceitful and obsessive slave to the corruption of the Ring."
+              - column:
+                  name: year
+                  value: '1954'
+              - column:
+                  name: page_amount
+                  value: '525'
+              - column:
+                  name: author_id
+                  value: '4'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The Return of the King'
+              - column:
+                  name: description
+                  value: "While the evil might of the Dark Lord Sauron swarms out to conquer all Middle-earth, Frodo and Sam struggle deep into Mordor, seat of Sauron’s power. To defeat the Dark Lord, the One Ring, ruler of the accursed Rings of Power, must be destroyed in the fires of Mount Doom. But the way is impossibly hard, and Frodo is weakening. Weighed down by the compulsion of the Ring, he begins finally to despair."
+              - column:
+                  name: year
+                  value: '1955'
+              - column:
+                  name: page_amount
+                  value: '657'
+              - column:
+                  name: author_id
+                  value: '4'
+
+
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'Neil'
+              - column:
+                  name: surname
+                  value: 'Gaiman'
+              - column:
+                  name: age
+                  value: '63'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'American Gods'
+              - column:
+                  name: description
+                  value: "Locked behind bars for three years, Shadow did his time, quietly waiting for the magic day when he could return to Eagle Point, Indiana. A man no longer scared of what tomorrow might bring, all he wanted was to be with Laura, the wife he deeply loved, and start a new life."
+              - column:
+                  name: year
+                  value: '2001'
+              - column:
+                  name: page_amount
+                  value: '838'
+              - column:
+                  name: author_id
+                  value: '5'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'Norse Mythology'
+              - column:
+                  name: description
+                  value: "In Norse Mythology, Gaiman stays true to the myths in envisioning the major Norse pantheon: Odin, the highest of the high, wise, daring, and cunning; Thor, Odin’s son, incredibly strong yet not the wisest of gods; and Loki-son of a giant-blood brother to Odin and a trickster and unsurpassable manipulator."
+              - column:
+                  name: year
+                  value: '2010'
+              - column:
+                    name: page_amount
+                    value: '304'
+              - column:
+                  name: author_id
+                  value: '5'
+
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'Robert'
+              - column:
+                  name: surname
+                  value: 'Martin'
+              - column:
+                  name: age
+                  value: '71'
+
+        

@@ -4,7 +4,7 @@ import assignment_five.entity.Author;
 import assignment_five.entity.dto.AuthorDto;
 import assignment_five.services.AuthorService;
 import assignment_five.services.repositories.AuthorRepository;
-import assignment_five.utils.AuthorNotFoundException;
+import assignment_five.utils.exceptions.AuthorNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

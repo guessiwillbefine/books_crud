@@ -3,11 +3,12 @@ package assignment_five.services;
 import assignment_five.entity.Author;
 import assignment_five.entity.dto.AuthorDto;
 import assignment_five.services.repositories.AuthorRepository;
-import assignment_five.utils.AuthorNotFoundException;
+import assignment_five.utils.exceptions.AuthorNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,5 +49,20 @@ public class AuthorService {
     public void delete(AuthorDto dto) {
         Optional<Author> author = authorRepository.findByNameAndSurname(dto.getName(), dto.getSurname());
         author.ifPresent(authorRepository::delete);
+    }
+
+    @Transactional(readOnly = true)
+    public List<AuthorDto> getAll() {
+       return authorRepository.findAll().stream()
+               .map(author -> AuthorDto.builder()
+                       .age(author.getAge())
+                       .name(author.getName())
+                       .surname(author.getSurname())
+                       .build())
+               .toList();
+    }
+    @Transactional(readOnly = true)
+    public Optional<Author> findByNameAndSurname(String name, String surname) {
+       return authorRepository.findByFullName(name, surname);
     }
 }

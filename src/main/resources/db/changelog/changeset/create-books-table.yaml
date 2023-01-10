@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-author-table
+      id: create-books-table
       author: vadim
       changes:
         - createTable:
-            tableName: author
+            tableName: book
             columns:
               - column:
                   name: id
@@ -15,16 +15,21 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: name
-                  type: varchar(20)
+                  type: varchar(30)
                   constraints:
                     nullable: false
               - column:
-                  name: surname
-                  type: varchar(20)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: age
-                  type: int
+                  name: description
+                  type: varchar(500)
                   constraints:
                     nullable: true
+              - column:
+                  name: author_id
+                  type: int
+                  constraints:
+                    foreignKeyName: author_article_fk
+                    referencedTableName: author
+                    referencedColumnNames: id
+                    nullable: true
+                    unique: false
+

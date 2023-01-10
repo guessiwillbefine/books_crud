@@ -1,5 +1,6 @@
 package assignment_five.utils;
 
+import assignment_five.utils.exceptions.AuthorException;
 import lombok.Getter;
 
 @Getter
