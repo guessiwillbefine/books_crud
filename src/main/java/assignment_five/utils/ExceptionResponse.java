@@ -1,16 +1,14 @@
 package assignment_five.utils;
 
-import assignment_five.utils.exceptions.AuthorException;
 import lombok.Getter;
 
 @Getter
 public class ExceptionResponse {
-    private final String responseMessage;
-
+    private final String response;
     private ExceptionResponse(String responseMessage) {
-        this.responseMessage = responseMessage;
+        this.response = responseMessage;
     }
-    public static ExceptionResponse of(AuthorException exception) {
+    public static ExceptionResponse of(RuntimeException exception) {
         return new ExceptionResponse(exception.getMessage());
     }
 }

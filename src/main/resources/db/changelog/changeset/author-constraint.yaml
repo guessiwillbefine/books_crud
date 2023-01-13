@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: make-author-unique
+      author: vadim
+      changes:
+        - addUniqueConstraint:
+            tableName: author
+            constraintName: author_full_name
+            columnNames: name, surname

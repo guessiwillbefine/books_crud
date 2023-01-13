@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 import java.util.Objects;
 
 @Getter
@@ -26,7 +25,7 @@ public class Book {
     private String description;
     @Column(name="page_amount")
     private int pageAmount;
-    @Column
+    @Column(name="publish_year")
     private int year;
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")

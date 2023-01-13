@@ -1,17 +1,26 @@
 package assignment_five.entity.dto;
 
 import assignment_five.utils.ApplicationConstants;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
 import org.hibernate.validator.constraints.Length;
 
+import java.io.Serializable;
+
+@Jacksonized
 @Builder
 @Getter
+@Setter
 @ToString
-public class AuthorDto {
+public class AuthorDto implements Serializable {
+    @Nullable
+    private Long id;
     @Length(min = ApplicationConstants.Validation.MIN_AUTHOR_NAME_SIZE,
             max = ApplicationConstants.Validation.MAX_AUTHOR_NAME_SIZE)
     private String name;

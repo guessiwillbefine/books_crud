@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: make-book-unique-for-author
+      author: vadim
+      changes:
+        - addUniqueConstraint:
+            tableName: book
+            constraintName: book_name_author
+            columnNames: name, author_id

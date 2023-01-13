@@ -1,0 +1,191 @@
+databaseChangeLog:
+  - changeSet:
+      id: second-dataset
+      author: vadim
+      changes:
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'Massimo'
+              - column:
+                  name: surname
+                  value: 'Pigliucci'
+              - column:
+                  name: age
+                  value: '58'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'How to be Stroic'
+              - column:
+                  name: description
+                  value: "By understanding Stoicism, we can learn to answer crucial questions: Should we get married or divorced? How should we handle our money in a world nearly destroyed by a financial crisis? How can we survive great personal tragedy? Whoever we are, Stoicism has something for us—and How to Be a Stoic is the essential guide."
+              - column:
+                  name: page_amount
+                  value: '241'
+              - column:
+                  name: author_id
+                  value: '7'
+
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'Edgar'
+              - column:
+                  name: surname
+                  value: 'Allan Poe'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'Fall of Usher House'
+              - column:
+                  name: description
+                  value: "The Fall ..  recounts the terrible events that befall the last remaining members of the once-illustrious Usher clan before it is quite literally rent asunder. With amazing economy, Poe plunges the reader into a state of deliciously agonizing suspense. It's a must-read for fans of the golden era of horror writing. The Fall . is one of Poe best known short stories - if not the best."
+              - column:
+                  name: page_amount
+                  value: '90'
+              - column:
+                  name: publish_year
+                  value: '1839'
+              - column:
+                  name: author_id
+                  value: '8'
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The Black Cat'
+              - column:
+                  name: description
+                  value: "The Black Cat is the story of an alcoholic who is driven by his addiction. He tortures and kills his cat, Pluto. Then, a stray cat that looks almost exactly like the cat he murdered except for a gallows mark on its chest follows him home and drives him to become even more irrationally violent."
+              - column:
+                  name: publish_year
+                  value: '1846'
+              - column:
+                  name: page_amount
+                  value: '40'
+              - column:
+                  name: author_id
+                  value: '8'
+
+        - insert:
+            tableName: author
+            columns:
+              - column:
+                  name: name
+                  value: 'Steven'
+              - column:
+                  name: surname
+                  value: 'King'
+              - column:
+                  name: age
+                  value: '75'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The Gunslinger'
+              - column:
+                  name: description
+                  value: "He is a haunting figure, a loner on a spellbinding journey into good and evil. In his desolate world, which frighteningly mirrors our own, Roland pursues The Man in Black, encounters an alluring woman named Alice, and begins a friendship with the Kid from Earth called Jake. Both grippingly realistic and eerily dreamlike, The Gunslinger leaves readers eagerly awaiting the next chapter."
+              - column:
+                  name: publish_year
+                  value: '1974'
+              - column:
+                  name: page_amount
+                  value: '231'
+              - column:
+                  name: author_id
+                  value: '9'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The drawing of Three'
+              - column:
+                  name: description
+                  value: "While pursuing his quest for the Dark Tower through a world that is a nightmarishly distorted mirror image of our own, Roland, the last gunslinger, encounters three mysterious doorways on the beach. Each one enters into the life of a different person living in contemporary New York."
+              - column:
+                  name: publish_year
+                  value: '1987'
+              - column:
+                  name: page_amount
+                  value: '463'
+              - column:
+                  name: author_id
+                  value: '9'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The Waste Lands'
+              - column:
+                  name: description
+                  value: "Roland, Susannah, and Eddie must draw Jake into Mid-World then follow the Path of the Beam all the way to the Dark Tower. But nothing is easy in Mid-World. Along the way our tet stumbles into the ruined city of Lud, and are caught between the warring gangs of the Pubes and the Grays. The only way out of Lud is to wake Blaine the Mono, an insane train that has a passion for riddling, and for suicidal journeys."
+              - column:
+                  name: publish_year
+                  value: '1991'
+              - column:
+                  name: page_amount
+                  value: '422'
+              - column:
+                  name: author_id
+                  value: '9'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'Wizard and Glass'
+              - column:
+                  name: description
+                  value: "While camping Roland tells his ka-tet a story about another thinny, one that he encountered when he was little more than a boy. Over the course of one long magical night, Roland transports us to the Mid-World of long-ago and a seaside town called Hambry, where he and his old tet-mates Alain and Cuthbert battled the forces of John Farson, the harrier who—with a little help from a seeing sphere called Maerlyn’s Grapefruit—ignited Mid-World’s final war."
+              - column:
+                  name: publish_year
+                  value: '1997'
+              - column:
+                  name: page_amount
+                  value: '896'
+              - column:
+                  name: author_id
+                  value: '9'
+
+        - insert:
+            tableName: book
+            columns:
+              - column:
+                  name: name
+                  value: 'The wolves of Calla'
+              - column:
+                  name: description
+                  value: "Roland and his tet have just returned to the path of the Beam when they discover that they are being followed by a group of inexperienced trackers. The trackers are from the town of Calla Bryn Sturgis, and they desperately need the help of gunslingers. Once every generation, a band of masked riders known as the Wolves gallop out of the dark land of Thunderclap to steal one half of all the twins born in the Callas. "
+              - column:
+                  name: publish_year
+                  value: '2003'
+              - column:
+                  name: page_amount
+                  value: '931'
+              - column:
+                  name: author_id
+                  value: '9'
+
+
+
+
+

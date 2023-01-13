@@ -18,11 +18,9 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<AuthorDto> getAllAuthors() {
-        var list =  authorService.getAll();
-        System.out.println(list);
-        return list;
+    public List<AuthorDto> getAllAuthors(@RequestParam(value = "size", required = false) Integer pageSize,
+                                         @RequestParam(value = "page", required = false) Integer pageNum) {
+        return authorService.getAll();
     }
 
     @GetMapping("/{id}")
@@ -32,7 +30,8 @@ public class AuthorController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody @Valid AuthorDto author, BindingResult bindingResult) {
+    public void create(@RequestBody @Valid AuthorDto author,
+                       BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new AuthorValidationException(bindingResult.getAllErrors().toString());
         }
@@ -40,16 +39,15 @@ public class AuthorController {
     }
 
     @PatchMapping("/update")
-    @ResponseStatus(HttpStatus.OK)
-    public void update(@RequestBody @Valid AuthorDto author, BindingResult bindingResult) {
+    public void update(@RequestBody @Valid AuthorDto author,
+                       BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new AuthorValidationException(bindingResult.getAllErrors().toString());
         }
-        authorService.delete(author);
+        authorService.update(author);
     }
 
     @DeleteMapping("/delete")
-    @ResponseStatus(HttpStatus.OK)
     public void delete(@RequestBody AuthorDto author) {
         authorService.delete(author);
     }

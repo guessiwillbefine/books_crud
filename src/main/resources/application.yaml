@@ -1,3 +1,5 @@
+#dev environment
+---
 spring:
   liquibase:
     clear-checksums: true
@@ -11,4 +13,24 @@ spring:
   datasource:
     username: root
     password: test
-    url: jdbc:mysql://localhost:3306/crud_db
+    url: jdbc:mysql://localhost/crud_db
+
+#test environment
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  liquibase:
+    clear-checksums: true
+    change-log: db/changelog/changelog.yaml
+  jpa:
+    show-sql: false
+    database-platform: org.hibernate.dialect.H2Dialect
+    database: h2
+    hibernate:
+      ddl-auto: none
+  datasource:
+    username: root
+    password: test
+    url: jdbc:h2:mem:test_db;MODE=MySQL

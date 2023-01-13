@@ -26,7 +26,7 @@ databaseChangeLog:
                   name: page_amount
                   value: '549'
               - column:
-                  name: year
+                  name: publish_year
                   value: '1980'
               - column:
                   name: author_id
@@ -42,7 +42,7 @@ databaseChangeLog:
                       name: description
                       value: "Bored with their work, three Milanese editors cook up “the Plan,” a hoax that connects the medieval Knights Templar with other occult groups from ancient to modern times. This produces a map indicating the geographical point from which all the powers of the earth can be controlled—a point located in Paris, France, at Foucault’s Pendulum. "
                   - column:
-                      name: year
+                      name: publish_year
                       value: '1988'
                   - column:
                       name: page_amount
@@ -60,7 +60,7 @@ databaseChangeLog:
                       name: description
                       value: "19th-century Europe abounds with the ghastly and the mysterious. Italian republicans strangle priests with their own intestines. French criminals plan bombings by day and celebrate Black Masses at night. Every nation has its own secret service, perpetrating forgeries. From the unification of Italy to the Paris Commune, Europe is in tumult and everyone needs a scapegoat. But what if lay one lone man? What if that evil genius created its most infamous document?"
                   - column:
-                      name: year
+                      name: publish_year
                       value: '2010'
                   - column:
                       name: author_id
@@ -88,7 +88,7 @@ databaseChangeLog:
                   name: description
                   value: "A magnificent blending of the music, the mood, and the ethos that was the sixties with the story of one college student's romantic coming of age, Norwegian Wood brilliantly recaptures a young man's first, hopeless, and heroic love."
               - column:
-                  name: year
+                  name: publish_year
                   value: '1987'
               - column:
                   name: author_id
@@ -103,7 +103,7 @@ databaseChangeLog:
                   name: description
                   value: "Japan's most highly regarded novelist now vaults into the first ranks of international fiction writers with this heroically imaginative novel, which is at once a detective story, an account of a disintegrating marriage, and an excavation of the buried secrets of World War II."
               - column:
-                  name: year
+                  name: publish_year
                   value: '1994'
               - column:
                   name: page_amount
@@ -121,7 +121,7 @@ databaseChangeLog:
                   name: description
                   value: "Kafka on the Shore, a tour de force of metaphysical reality, is powered by two remarkable characters: a teenage boy, Kafka Tamura, who runs away from home either to escape a gruesome oedipal prophecy or to search for his long-missing mother and sister; and an aging simpleton called Nakata, who never recovered from a wartime affliction and now is drawn toward Kafka for reasons that, like the most basic activities of daily life, he cannot fathom."
               - column:
-                  name: year
+                  name: publish_year
                   value: '2002'
               - column:
                   name: page_amount
@@ -161,7 +161,7 @@ databaseChangeLog:
                   name: description
                   value: "This is the first part of Tolkien’s epic masterpiece, «The Lord of the Rings», featuring a striking black cover based on Tolkien’s own design, the definitive text, and a detailed map of Middle-earth. Sauron, the Dark Lord, has gathered to him all the Rings of Power — the means by which he intends to rule Middle-earth. All he lacks in his plans for dominion is the One Ring — the ring that rules them all — which has fallen into the hands of the hobbit, Bilbo Baggins."
               - column:
-                  name: year
+                  name: publish_year
                   value: '1954'
               - column:
                   name: page_amount
@@ -179,7 +179,7 @@ databaseChangeLog:
                   name: description
                   value: "The Fellowship is scattered. Some brace hopelessly for war against the ancient evil of Sauron. Others must contend with the treachery of the wizard Saruman. Only Frodo and Sam are left to take the One Ring, ruler of the accursed Rings of Power, to be destroyed in Mordor, the dark realm where Sauron is supreme. Their guide is Gollum, deceitful and obsessive slave to the corruption of the Ring."
               - column:
-                  name: year
+                  name: publish_year
                   value: '1954'
               - column:
                   name: page_amount
@@ -198,7 +198,7 @@ databaseChangeLog:
                   name: description
                   value: "While the evil might of the Dark Lord Sauron swarms out to conquer all Middle-earth, Frodo and Sam struggle deep into Mordor, seat of Sauron’s power. To defeat the Dark Lord, the One Ring, ruler of the accursed Rings of Power, must be destroyed in the fires of Mount Doom. But the way is impossibly hard, and Frodo is weakening. Weighed down by the compulsion of the Ring, he begins finally to despair."
               - column:
-                  name: year
+                  name: publish_year
                   value: '1955'
               - column:
                   name: page_amount
@@ -231,7 +231,7 @@ databaseChangeLog:
                   name: description
                   value: "Locked behind bars for three years, Shadow did his time, quietly waiting for the magic day when he could return to Eagle Point, Indiana. A man no longer scared of what tomorrow might bring, all he wanted was to be with Laura, the wife he deeply loved, and start a new life."
               - column:
-                  name: year
+                  name: publish_year
                   value: '2001'
               - column:
                   name: page_amount
@@ -250,7 +250,7 @@ databaseChangeLog:
                   name: description
                   value: "In Norse Mythology, Gaiman stays true to the myths in envisioning the major Norse pantheon: Odin, the highest of the high, wise, daring, and cunning; Thor, Odin’s son, incredibly strong yet not the wisest of gods; and Loki-son of a giant-blood brother to Odin and a trickster and unsurpassable manipulator."
               - column:
-                  name: year
+                  name: publish_year
                   value: '2010'
               - column:
                     name: page_amount
