@@ -16,8 +16,6 @@ public class ApplicationConstants {
                 MIN_AUTHOR_SURNAME_SIZE + " and " + MAX_AUTHOR_SURNAME_SIZE;
         public static final int MIN_AGE = 18;
         public static final int MAX_AGE = 100;
-        public static final String AUTHOR_AGE_MSG = "author's age must be between " +
-                MIN_AGE + " and " + MAX_AGE;
         public static final int MAX_YEAR = 2023;
         public static final String BOOK_YEAR_MSG = "year of publishing can't be greater than " + MAX_AGE;
         public static final int DESCRIPTION_SIZE = 500;
@@ -28,5 +26,10 @@ public class ApplicationConstants {
                 MIN_BOOK_NAME_SIZE + " and " + MAX_BOOK_NAME_SIZE;
         public static final int MIN_BOOK_PAGES = 1;
         public static final String BOOK_PAGE_MSG = "book's must have at least " + MIN_BOOK_PAGES + " pages";
+    }
+    @UtilityClass
+    public class Pageable {
+        public static final int DEFAULT_PAGE_SIZE = 10;
+        public static final int DEFAULT_PAGE = 0;
     }
 }

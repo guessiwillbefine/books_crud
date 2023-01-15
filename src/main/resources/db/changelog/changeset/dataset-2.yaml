@@ -20,7 +20,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: name
-                  value: 'How to be Stroic'
+                  value: 'How to be Stoic'
               - column:
                   name: description
                   value: "By understanding Stoicism, we can learn to answer crucial questions: Should we get married or divorced? How should we handle our money in a world nearly destroyed by a financial crisis? How can we survive great personal tragedy? Whoever we are, Stoicism has something for us—and How to Be a Stoic is the essential guide."
@@ -95,7 +95,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: name
-                  value: 'The Gunslinger'
+                  value: 'Gunslinger'
               - column:
                   name: description
                   value: "He is a haunting figure, a loner on a spellbinding journey into good and evil. In his desolate world, which frighteningly mirrors our own, Roland pursues The Man in Black, encounters an alluring woman named Alice, and begins a friendship with the Kid from Earth called Jake. Both grippingly realistic and eerily dreamlike, The Gunslinger leaves readers eagerly awaiting the next chapter."
@@ -184,8 +184,3 @@ databaseChangeLog:
               - column:
                   name: author_id
                   value: '9'
-
-
-
-
-

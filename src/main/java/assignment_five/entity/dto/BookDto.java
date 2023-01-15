@@ -21,7 +21,8 @@ import java.io.Serializable;
 public class BookDto implements Serializable {
     private Long id;
     @Nullable
-    @Max(ApplicationConstants.Validation.MAX_YEAR)
+    @Max(value = ApplicationConstants.Validation.MAX_YEAR,
+            message = ApplicationConstants.Validation.BOOK_YEAR_MSG)
     private Integer year;
     @Nullable
     @Min(value = ApplicationConstants.Validation.MIN_BOOK_PAGES,

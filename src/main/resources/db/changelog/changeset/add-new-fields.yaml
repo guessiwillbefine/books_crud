@@ -11,6 +11,10 @@ databaseChangeLog:
                   type: int
                   constraints:
                     nullable: true
+
+        - addColumn:
+            tableName: book
+            columns:
               - column:
                   name: publish_year
                   type: int

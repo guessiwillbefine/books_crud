@@ -2,6 +2,7 @@ package assignment_five.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ import java.util.Objects;
 @ToString
 @Entity
 @Table(name = "author")
+@RequiredArgsConstructor
 public class Author {
     @Id
     @Column
@@ -33,14 +35,14 @@ public class Author {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Author author = (Author) o;
-        return id == author.id && Objects.equals(age, author.age)
+        return Objects.equals(id, author.id) && Objects.equals(age, author.age)
                 && Objects.equals(name, author.name)
                 && Objects.equals(surname, author.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, surname, age);
+        return Math.toIntExact(id);
     }
 }
 

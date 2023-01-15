@@ -271,5 +271,3 @@ databaseChangeLog:
               - column:
                   name: age
                   value: '71'
-
-        

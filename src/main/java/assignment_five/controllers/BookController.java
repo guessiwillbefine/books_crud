@@ -1,75 +1,66 @@
 package assignment_five.controllers;
 
 import assignment_five.entity.Book;
-import assignment_five.entity.dto.AuthorDto;
 import assignment_five.entity.dto.BookDto;
+import assignment_five.entity.dto.SearchRequestDto;
 import assignment_five.services.BookService;
-import assignment_five.utils.exceptions.BookNotFoundException;
 import assignment_five.utils.exceptions.BookValidationException;
+import assignment_five.utils.mapper.BookMapper;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import java.util.Optional;
 
+import java.util.List;
+
+@Slf4j
 @RestController
 @RequestMapping("/books")
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
 
-    @GetMapping
-    public BookDto findBook(@RequestBody BookDto bookDto){
-        Book book = bookService.findBook(bookDto);
-        return BookDto.builder()
-                .id(book.getId())
-                .name(book.getName())
-                .description(book.getDescription())
-                .author(AuthorDto.builder()
-                        .name(book.getAuthor().getName())
-                        .surname(book.getAuthor().getSurname())
-                        .age(book.getAuthor().getAge())
-                        .build())
-                .build();
+    @GetMapping("/search")
+    public List<BookDto> findByParams(@RequestBody @NotNull @Valid SearchRequestDto searchRequestDto) {
+        return bookService.getBookList(searchRequestDto).stream()
+                .map(BookMapper.INSTANCE::map)
+                .toList();
     }
+
+    @GetMapping
+    public BookDto findBook(@RequestBody @NotNull final BookDto bookDto) {
+        Book book = bookService.findBook(bookDto);
+        return BookMapper.INSTANCE.map(book);
+    }
+
     @GetMapping("/all")
-    public List<BookDto> getAllBooks(@RequestParam(value = "size", required = false) Integer pageSize,
-                                     @RequestParam(value = "page", required = false) Integer pageNum) {
-        //todo
-        return bookService.getBookList(pageSize, pageNum);
+    public List<BookDto> getAllBooks(@RequestParam(value = "size", required = false) final Integer pageSize,
+                                     @RequestParam(value = "page", required = false) final Integer pageNum) {
+        return bookService.getBookList(pageSize, pageNum).stream()
+                .map(BookMapper.INSTANCE::map)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public BookDto findById(@PathVariable("id") long id) {
-        Optional<Book> bookOptional = bookService.findById(id);
-        if (bookOptional.isPresent()) {
-            Book book = bookOptional.get();
-            return BookDto.builder()
-                    .name(book.getName())
-                    .description(book.getDescription())
-                    .author(AuthorDto.builder()
-                            .name(book.getAuthor().getName())
-                            .surname(book.getAuthor().getSurname())
-                            .age(book.getAuthor().getAge())
-                            .build())
-                    .build(); //todo.........
-        } //todo move to service
-        throw new BookNotFoundException(String.format("Book with id[%d] wasn't found", id));
+    public BookDto findById(@PathVariable("id") final long id) {
+        return BookMapper.INSTANCE.map(bookService.findById(id));
     }
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody @Valid BookDto bookDto, BindingResult bindingResult) {
+    public void create(@RequestBody @NotNull @Valid final BookDto bookDto, BindingResult bindingResult) {
+        log.error(String.valueOf(bindingResult.hasErrors()));
         if (bindingResult.hasErrors()) {
             throw new BookValidationException(bindingResult);
         }
-        bookService.create(bookDto);
+        bookService.save(bookDto);
     }
 
     @PatchMapping("/update")
-    public void update(@RequestBody @Valid BookDto bookDto, BindingResult bindingResult) {
+    public void update(@RequestBody @NotNull @Valid final BookDto bookDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new BookValidationException(bindingResult.getAllErrors().toString());
         }
@@ -77,7 +68,7 @@ public class BookController {
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody @Valid BookDto bookDto, BindingResult bindingResult) {
+    public void delete(@RequestBody @NotNull @Valid final BookDto bookDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new BookValidationException(bindingResult.getAllErrors().toString());
         }

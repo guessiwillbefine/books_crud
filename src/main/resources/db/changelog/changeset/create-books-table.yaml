@@ -32,4 +32,4 @@ databaseChangeLog:
                     referencedColumnNames: id
                     nullable: true
                     unique: false
-
+                    deleteCascade: true

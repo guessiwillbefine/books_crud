@@ -22,10 +22,12 @@ public class AuthorDto implements Serializable {
     @Nullable
     private Long id;
     @Length(min = ApplicationConstants.Validation.MIN_AUTHOR_NAME_SIZE,
-            max = ApplicationConstants.Validation.MAX_AUTHOR_NAME_SIZE)
+            max = ApplicationConstants.Validation.MAX_AUTHOR_NAME_SIZE,
+            message = ApplicationConstants.Validation.AUTHOR_NAME_MSG)
     private String name;
     @Length(min = ApplicationConstants.Validation.MIN_AUTHOR_SURNAME_SIZE,
-            max = ApplicationConstants.Validation.MAX_AUTHOR_SURNAME_SIZE)
+            max = ApplicationConstants.Validation.MAX_AUTHOR_SURNAME_SIZE,
+            message = ApplicationConstants.Validation.AUTHOR_SURNAME_MSG)
     private String surname;
     @Min(ApplicationConstants.Validation.MIN_AGE)
     @Max(ApplicationConstants.Validation.MAX_AGE)

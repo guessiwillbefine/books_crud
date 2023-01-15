@@ -10,10 +10,12 @@ spring:
     database: mysql
     hibernate:
       ddl-auto: none
+
   datasource:
     username: root
     password: test
     url: jdbc:mysql://localhost/crud_db
+
 
 #test environment
 ---

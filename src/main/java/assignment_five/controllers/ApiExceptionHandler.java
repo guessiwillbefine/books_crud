@@ -2,9 +2,11 @@ package assignment_five.controllers;
 
 import assignment_five.utils.ExceptionResponse;
 import assignment_five.utils.exceptions.*;
+import org.hibernate.query.SemanticException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
@@ -18,6 +20,11 @@ public class ApiExceptionHandler {
     @ExceptionHandler({AuthorDuplicateException.class, AuthorValidationException.class,
             BookDuplicateException.class, BookValidationException.class})
     public ResponseEntity<ExceptionResponse> badRequestResponseHandler(RuntimeException e) {
+        return ResponseEntity.badRequest().body(ExceptionResponse.of(e));
+    }
+
+    @ExceptionHandler({SemanticException.class})
+    public ResponseEntity<ExceptionResponse> handleCriteriaError(SemanticException e) {
         return ResponseEntity.badRequest().body(ExceptionResponse.of(e));
     }
 }

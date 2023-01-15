@@ -24,9 +24,9 @@ public class Book {
     @Column
     private String description;
     @Column(name="page_amount")
-    private int pageAmount;
+    private Integer pageAmount;
     @Column(name="publish_year")
-    private int year;
+    private Integer year;
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
@@ -43,6 +43,6 @@ public class Book {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, author);
+        return Math.toIntExact(id);
     }
 }

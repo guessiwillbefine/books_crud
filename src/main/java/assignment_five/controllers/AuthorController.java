@@ -1,9 +1,12 @@
 package assignment_five.controllers;
 
+import assignment_five.entity.Author;
 import assignment_five.entity.dto.AuthorDto;
 import assignment_five.services.AuthorService;
 import assignment_five.utils.exceptions.AuthorValidationException;
+import assignment_five.utils.mapper.AuthorMapper;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -17,20 +20,28 @@ import java.util.List;
 public class AuthorController {
     private final AuthorService authorService;
 
+    @GetMapping
+    public AuthorDto findAuthor(@RequestParam("name") String name,
+                                @RequestParam("surname") String surname) {
+        Author author = authorService.findAuthorByFullName(name, surname);
+        return AuthorMapper.INSTANCE.map(author);
+    }
+
     @GetMapping("/all")
-    public List<AuthorDto> getAllAuthors(@RequestParam(value = "size", required = false) Integer pageSize,
-                                         @RequestParam(value = "page", required = false) Integer pageNum) {
-        return authorService.getAll();
+    public List<AuthorDto> getAllAuthors() {
+        return authorService.getAll()
+                .stream().map(AuthorMapper.INSTANCE::map)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public AuthorDto getAuthorById(@PathVariable long id) {
-        return authorService.findById(id);
+    public AuthorDto getAuthorById(@PathVariable final long id) {
+        return AuthorMapper.INSTANCE.map(authorService.findById(id));
     }
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody @Valid AuthorDto author,
+    public void create(@RequestBody @NotNull @Valid final AuthorDto author,
                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new AuthorValidationException(bindingResult.getAllErrors().toString());
@@ -39,7 +50,7 @@ public class AuthorController {
     }
 
     @PatchMapping("/update")
-    public void update(@RequestBody @Valid AuthorDto author,
+    public void update(@RequestBody @NotNull @Valid final AuthorDto author,
                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new AuthorValidationException(bindingResult.getAllErrors().toString());
@@ -48,7 +59,7 @@ public class AuthorController {
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody AuthorDto author) {
+    public void delete(@RequestBody @NotNull @Valid final AuthorDto author) {
         authorService.delete(author);
     }
 }

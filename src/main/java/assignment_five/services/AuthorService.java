@@ -3,78 +3,81 @@ package assignment_five.services;
 import assignment_five.entity.Author;
 import assignment_five.entity.dto.AuthorDto;
 import assignment_five.services.repositories.AuthorRepository;
+import assignment_five.services.repositories.CrudService;
 import assignment_five.utils.exceptions.AuthorDuplicateException;
 import assignment_five.utils.exceptions.AuthorNotFoundException;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.String.format;
+
 @Service
+@Transactional
 @RequiredArgsConstructor
-public class AuthorService {
+public class AuthorService implements CrudService<AuthorDto,Long> {
     private final AuthorRepository authorRepository;
 
+    @Override
     @Transactional(readOnly = true)
-    public AuthorDto findById(long id) {
-        Optional<Author> authorOptional = authorRepository.findById(id);
+    public Author findById(@NotNull Long id) {
+        final Optional<Author> authorOptional = authorRepository.findById(id);
         if (authorOptional.isPresent()) {
-            Author author = authorOptional.get();
-            return AuthorDto.builder()
-                    .name(author.getName())
-                    .surname(author.getSurname())
-                    .age(author.getAge())
-                    .build();
+            return authorOptional.get();
         }
-        throw new AuthorNotFoundException(String.format("Author with id[%s] wasn't found", id));
+        throw new AuthorNotFoundException(format("Author with id[%s] wasn't found", id));
     }
-
-    @Transactional
+    @Override
     public void save(AuthorDto dto) {
-        Optional<Author> existingAuthor = findByNameAndSurname(dto.getName(), dto.getSurname());
-        if (existingAuthor.isPresent()) {
-            throw new AuthorDuplicateException(String.format("Author[%s %s] already exists",
+        if (authorRepository.findByNameAndSurname(dto.getName(), dto.getSurname()).isPresent()) {
+            throw new AuthorDuplicateException(format("Author[%s %s] already exists",
                     dto.getName(), dto.getSurname()));
         }
-        Author author = new Author();
+        final Author author = new Author();
         author.setName(dto.getName());
         author.setSurname(dto.getSurname());
-        author.setAge(dto.getAge()); //TODO mapper
+        author.setAge(dto.getAge());
         authorRepository.save(author);
     }
 
-    @Transactional
+    @Override
     public void update(AuthorDto dto) {
-        Optional<Author> author = authorRepository.findByNameAndSurname(dto.getName(), dto.getSurname());
+        final Optional<Author> author = authorRepository.findById(dto.getId());
         if (author.isPresent()) {
-            Author authorToUpdate = author.get();
+            final Author authorToUpdate = author.get();
             authorToUpdate.setName(dto.getName());
             authorToUpdate.setSurname(dto.getSurname());
             authorToUpdate.setAge(dto.getAge());
             authorRepository.save(authorToUpdate);
         }
     }
-
-    @Transactional
+    @Override
     public void delete(AuthorDto dto) {
-        Optional<Author> author = authorRepository.findByNameAndSurname(dto.getName(), dto.getSurname());
+        final Optional<Author> author = authorRepository.findByNameAndSurname(dto.getName(), dto.getSurname());
         author.ifPresent(authorRepository::delete);
     }
 
     @Transactional(readOnly = true)
-    public List<AuthorDto> getAll() {
-        return authorRepository.findAll().stream()
-                .map(author -> AuthorDto.builder()
-                        .age(author.getAge())
-                        .name(author.getName())
-                        .surname(author.getSurname())
-                        .build())
-                .toList();
+    public List<Author> getAll() {
+        return authorRepository.findAll();
+    }
+
+
+    @Transactional(readOnly = true)
+    public Optional<Author> findAuthor(AuthorDto authorDto) {
+        return authorRepository.findByFullName(authorDto.getName(), authorDto.getSurname());
     }
 
     @Transactional(readOnly = true)
-    public Optional<Author> findByNameAndSurname(String name, String surname) {
-        return authorRepository.findByFullName(name, surname);
+    public Author findAuthorByFullName(String name, String surname) {
+        Optional<Author> byFullName = authorRepository.findByFullName(name, surname);
+        if (byFullName.isPresent()) {
+            return byFullName.get();
+        }
+        throw new AuthorNotFoundException(format("Author[%s %s] wasn't found", name, surname));
     }
 }
