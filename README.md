@@ -39,7 +39,7 @@ Response body:
 }
 ```
 This request is case-insensitive, so you can write "Steven" or "steven", both are correct
-- ## (GET) authors/{id}
+- ## (GET) /authors/{id}
 Method to find book by its Id int DB. Example :
 ### Request:
 ```http request
@@ -55,10 +55,10 @@ http://localhost:8080//books/3
 }
 
 ```
-- ## (GET) authors/all
+- ## (GET) /authors/all
 Endpoint will return a list of all existing authors
 
-- ## (POST) authors/create
+- ## (POST) /authors/create
 Endpoint for creating new authors. Request have valid body with author data:
 ```json
 {
@@ -67,7 +67,7 @@ Endpoint for creating new authors. Request have valid body with author data:
     "age" : "21"
 }
 ```
-- ## (DELETE) authors/delete
+- ## (DELETE) /authors/delete
 Request for deleting authors. Must contain body with name and surname of author:
 ```json
 {
@@ -75,7 +75,7 @@ Request for deleting authors. Must contain body with name and surname of author:
     "surname" : "newAuthorSurname"
 }
 ```
-- ## (Patch) authors/delete
+- ## (Patch) /authors/delete
 Updating authors entity. Request must have new author's data and his id : 
 ```json
 {
