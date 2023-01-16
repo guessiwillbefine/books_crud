@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -28,7 +29,7 @@ public class Author {
     private Integer age;
     @ToString.Exclude
     @OneToMany(mappedBy = "author")
-    private List<Book> books;
+    private Set<Book> books;
 
     @Override
     public boolean equals(Object o) {
