@@ -19,6 +19,7 @@ If you do all right liquibase migration file will generate a new database with t
 #### Book *--- Author
 
 # Endpoints
+all API endpoints begin with "/api"
 
 # Authors
 
@@ -27,7 +28,7 @@ Endpoint for finding author by his name and surname.
 
 Example:
 ```http request 
-http://localhost:8080//authors?name=steven&surname=king 
+http://localhost:8080/api/authors?name=steven&surname=king 
 ```
 Response body:
 ```json
@@ -43,7 +44,7 @@ This request is case-insensitive, so you can write "Steven" or "steven", both ar
 Method to find book by its Id int DB. Example :
 ### Request:
 ```http request
-http://localhost:8080//books/3
+http://localhost:8080/api/books/3
 ```
 ### Response
 ```json
@@ -101,7 +102,7 @@ Requires body, contains name of book and its author :
 Method to find book by its Id int DB. Example :
 
 ```http request
-http://localhost:8080/books/5
+http://localhost:8080/api/books/5
 ```
 
 ```json
