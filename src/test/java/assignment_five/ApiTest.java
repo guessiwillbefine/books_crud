@@ -4,7 +4,6 @@ import assignment_five.entity.dto.AuthorDto;
 import assignment_five.entity.dto.BookDto;
 import assignment_five.entity.dto.SearchRequestDto;
 import assignment_five.entity.dto.SearchRequestDto.Param;
-import assignment_five.services.repositories.AuthorRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -101,26 +100,24 @@ class ApiTest {
     @Test
     @DisplayName("test if duplicates are throwing exception with correct status code")
     void testBookAndAuthorCreateDuplicationError() throws Exception {
+        final String nonExistingAuthorJson = mapper.writeValueAsString(nonExistingAuthor);
+        final String nonExistingBookJson = mapper.writeValueAsString(nonExistingBook);
 
         mockMvc.perform(post("/authors/create")
-                        .contentType(mediaJson)
-                        .content(mapper.writeValueAsString(nonExistingAuthor)))
+                        .contentType(mediaJson).content(nonExistingAuthorJson))
                 .andExpect(status().isCreated());
 
         mockMvc.perform(post("/authors/create")
-                        .contentType(mediaJson)
-                        .content(mapper.writeValueAsString(nonExistingAuthor)))
+                        .contentType(mediaJson).content(nonExistingAuthorJson))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("response").exists());
 
         mockMvc.perform(post("/books/create")
-                        .contentType(mediaJson)
-                        .content(mapper.writeValueAsString(nonExistingBook)))
+                        .contentType(mediaJson).content(nonExistingBookJson))
                 .andExpect(status().isCreated());
 
         mockMvc.perform(post("/books/create")
-                        .contentType(mediaJson)
-                        .content(mapper.writeValueAsString(nonExistingBook)))
+                        .contentType(mediaJson).content(nonExistingBookJson))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("response").exists());
     }
@@ -178,24 +175,26 @@ class ApiTest {
     @DisplayName("testing updating books")
     void testBookUpdate() throws Exception {
         final String newBookName = "The Name of Rose 2";
-
+        final String bookJson = mapper.writeValueAsString(existingBook);
         final var book = mockMvc.perform(get("/books")
                         .contentType(mediaJson)
-                        .content(mapper.writeValueAsString(existingBook)))
-                .andExpect(status().isOk()).andReturn();
+                        .content(bookJson))
+                .andExpect(status().isOk())
+                .andReturn();
 
         final String responseBody = book.getResponse().getContentAsString();
         final BookDto updated = mapper.readValue(responseBody, BookDto.class);
         updated.setName(newBookName);
+        final String updatedJson = mapper.writeValueAsString(updated);
 
         mockMvc.perform(patch("/books/update")
                         .contentType(mediaJson)
-                        .content(mapper.writeValueAsString(updated)))
+                        .content(updatedJson))
                 .andExpect(status().isOk());
 
         final var response = mockMvc.perform(get("/books")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(updated)))
+                        .contentType(mediaJson)
+                        .content(updatedJson))
                 .andExpect(status().isOk()).andReturn();
 
         final String updatedResponse = response.getResponse().getContentAsString();
@@ -230,9 +229,10 @@ class ApiTest {
         final AuthorDto updated = mapper.readValue(responseBody, AuthorDto.class);
         updated.setName(newAuthorName);
 
+        final String updatedJson = mapper.writeValueAsString(updated);
         mockMvc.perform(patch("/authors/update")
                         .contentType(mediaJson)
-                        .content(mapper.writeValueAsString(updated)))
+                        .content(updatedJson))
                 .andExpect(status().isOk());
 
         final var response = mockMvc.perform(get("/authors")
@@ -248,9 +248,11 @@ class ApiTest {
     @Test
     @DisplayName("getting all authors test")
     void getAllShouldReturnList() throws Exception {
-        final var response = mockMvc.perform(get("/authors/all")).andExpect(status().isOk()).andReturn();
+        final var response = mockMvc.perform(get("/authors/all"))
+                .andExpect(status().isOk())
+                .andReturn();
         final String responseBody = response.getResponse().getContentAsString();
-        var authorDtoList = mapper.readValue(responseBody, List.class);
+        final var authorDtoList = mapper.readValue(responseBody, List.class);
         assertNotNull(authorDtoList);
         assertFalse(authorDtoList.isEmpty());
     }
