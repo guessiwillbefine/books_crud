@@ -4,6 +4,7 @@ import assignment_five.entity.dto.AuthorDto;
 import assignment_five.entity.dto.BookDto;
 import assignment_five.entity.dto.SearchRequestDto;
 import assignment_five.entity.dto.SearchRequestDto.Param;
+import assignment_five.services.repositories.AuthorRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -69,7 +70,7 @@ class ApiTest {
     void testSearchingByParams() throws Exception {
         String requestBody = mapper.writeValueAsString(validSearchRequest);
         mockMvc.perform(get("/books/search").contentType(mediaJson)
-                        .content(requestBody)).andExpect(status().isOk());
+                .content(requestBody)).andExpect(status().isOk());
     }
 
     @Test
@@ -242,5 +243,41 @@ class ApiTest {
         final AuthorDto receivedAuthor = mapper.readValue(response.getResponse().getContentAsString(), AuthorDto.class);
 
         assertEquals(updated.getName(), receivedAuthor.getName());
+    }
+
+    @Test
+    @DisplayName("getting all authors test")
+    void getAllShouldReturnList() throws Exception {
+        final var response = mockMvc.perform(get("/authors/all")).andExpect(status().isOk()).andReturn();
+        final String responseBody = response.getResponse().getContentAsString();
+        var authorDtoList = mapper.readValue(responseBody, List.class);
+        assertNotNull(authorDtoList);
+        assertFalse(authorDtoList.isEmpty());
+    }
+
+    @Test
+    @DisplayName("test getting authors by id")
+    void getByIdShouldReturnAuthorDto() throws Exception {
+        final var response = mockMvc.perform(get("/authors/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").exists())
+                .andExpect(jsonPath("surname").exists())
+                .andReturn();
+        final String responseBody = response.getResponse().getContentAsString();
+        final var authorDtoList = mapper.readValue(responseBody, AuthorDto.class);
+        assertNotNull(authorDtoList);
+    }
+
+    @Test
+    @DisplayName("getting all authors test")
+    void getByIdShouldReturnBookDto() throws Exception {
+        final var response = mockMvc.perform(get("/books/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("name").exists())
+                .andExpect(jsonPath("description").exists())
+                .andReturn();
+        final String responseBody = response.getResponse().getContentAsString();
+        final var BookDtoList = mapper.readValue(responseBody, BookDto.class);
+        assertNotNull(BookDtoList);
     }
 }
