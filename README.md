@@ -12,10 +12,15 @@
 - Додати інтеграційні тести для всіх REST-endpoints.
 
 ## Start
-To start the project you need to create an empty MySql database with schema name "crud_db". 
+----
+## upd. added to url param, that will generate DB if it doesn't exist. So you need only to specify username and password.
+
+To start the project you need to set up username and password in src/main/resources/apllication.yaml, and create an empty MySql database with schema name "crud_db". 
 There is a .mwb file in /src/main/resources with correct schema. Or you can specify you own database,
 but for this you need to change an url in src/main/resources/application.yaml for dev profile.
 If you do all right liquibase migration file will generate a new database with two entities : 
+
+
 #### Book *--- Author
 
 # Endpoints
