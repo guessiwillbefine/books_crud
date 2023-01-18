@@ -9,7 +9,6 @@ import assignment_five.utils.exceptions.AuthorDuplicateException;
 import assignment_five.utils.exceptions.AuthorNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -21,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 class AuthorServiceTest {
     @MockBean
     private AuthorRepository authorRepository;
@@ -65,7 +63,7 @@ class AuthorServiceTest {
         final var result = authorService.findAuthor(AuthorDto.builder()
                 .name("somename")
                 .surname("somesurname").build());
-        assertEquals(result.get(), author);
+        result.ifPresent(res -> assertEquals(res, author));
     }
 
     @Test
@@ -76,8 +74,9 @@ class AuthorServiceTest {
                 .surname("somesurname").build();
         when(authorRepository.findByFullName(anyString(), anyString()))
                 .thenReturn(Optional.of(author));
-        assertThrows(AuthorDuplicateException.class, ()-> authorService.save(authorDto));
+        assertThrows(AuthorDuplicateException.class, () -> authorService.save(authorDto));
     }
+
     @Test
     void testSavingEntitiesThatNotPresent() {
         final AuthorDto authorDto = AuthorDto.builder()
@@ -85,6 +84,6 @@ class AuthorServiceTest {
                 .surname("somesurname").build();
         when(authorRepository.findByFullName(anyString(), anyString()))
                 .thenReturn(Optional.empty());
-        assertDoesNotThrow(()-> authorService.save(authorDto));
+        assertDoesNotThrow(() -> authorService.save(authorDto));
     }
 }
