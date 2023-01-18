@@ -57,7 +57,7 @@ public class AuthorService implements CrudService<AuthorDto,Long> {
     }
     @Override
     public void delete(AuthorDto dto) {
-        final Optional<Author> author = authorRepository.findByNameAndSurname(dto.getName(), dto.getSurname());
+        final Optional<Author> author = authorRepository.findByFullName(dto.getName(), dto.getSurname());
         author.ifPresent(authorRepository::delete);
     }
 

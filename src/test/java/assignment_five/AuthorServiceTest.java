@@ -1,6 +1,8 @@
 package assignment_five;
 
+
 import assignment_five.entity.Author;
+import assignment_five.entity.dto.AuthorDto;
 import assignment_five.services.AuthorService;
 import assignment_five.services.repositories.AuthorRepository;
 import assignment_five.utils.exceptions.AuthorNotFoundException;
@@ -10,20 +12,21 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class BookServiceTest {
+class AuthorServiceTest {
     @MockBean
-    AuthorRepository authorRepository;
+    private AuthorRepository authorRepository;
     @Autowired
-    AuthorService authorService;
+    private AuthorService authorService;
 
     @Test
     void findByIdShouldReturnValidData() {
@@ -32,9 +35,9 @@ class BookServiceTest {
         author.setName("testName");
         author.setSurname("testSurname");
 
-        when(authorRepository.findById(any(Long.class))).thenReturn(Optional.of(author));
+        when(authorRepository.findById(anyLong())).thenReturn(Optional.of(author));
 
-        Author authorFromService = authorService.findById(1L);
+        final var authorFromService = authorService.findById(1L);
         assertEquals(author.getName(), authorFromService.getName());
         assertEquals(author.getSurname(), authorFromService.getSurname());
         assertEquals(author.getAge(), authorFromService.getAge());
@@ -43,5 +46,25 @@ class BookServiceTest {
     @Test
     void invalidIdShouldThrowException() {
         assertThrows(AuthorNotFoundException.class, () -> authorService.findById(-1L));
+    }
+
+    @Test
+    void getAllAuthorsShouldReturnList() {
+        final List<Author> authorList = new ArrayList<>();
+        when(authorRepository.findAll()).thenReturn(authorList);
+        final var result = authorService.getAll();
+
+        assertEquals(authorList, result);
+    }
+
+    @Test
+    void findByDtoShouldReturnEntity() {
+        final Author author = new Author();
+        when(authorRepository.findByFullName(anyString(), anyString()))
+                .thenReturn(Optional.of(author));
+        final var result = authorService.findAuthor(AuthorDto.builder()
+                .name("somename")
+                .surname("somesurname").build());
+        assertEquals(result.get(), author);
     }
 }
