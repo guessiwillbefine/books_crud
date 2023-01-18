@@ -21,8 +21,8 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @GetMapping
-    public AuthorDto findAuthor(@RequestParam("name") String name,
-                                @RequestParam("surname") String surname) {
+    public AuthorDto findAuthor(@RequestParam("name") @NotNull String name,
+                                @RequestParam("surname") @NotNull String surname) {
         Author author = authorService.findAuthorByFullName(name, surname);
         return AuthorMapper.INSTANCE.map(author);
     }
