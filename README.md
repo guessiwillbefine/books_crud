@@ -12,13 +12,19 @@
 - Додати інтеграційні тести для всіх REST-endpoints.
 
 ## Start
-To start the project you need to create an empty MySql database with schema name "crud_db". 
+----
+## upd. added to url param, that will generate DB if it doesn't exist. So you need only to specify username and password.
+
+To start the project you need to set up username and password in src/main/resources/apllication.yaml, and create an empty MySql database with schema name "crud_db". 
 There is a .mwb file in /src/main/resources with correct schema. Or you can specify you own database,
 but for this you need to change an url in src/main/resources/application.yaml for dev profile.
 If you do all right liquibase migration file will generate a new database with two entities : 
+
+
 #### Book *--- Author
 
 # Endpoints
+all API endpoints begin with "/api"
 
 # Authors
 
@@ -27,7 +33,7 @@ Endpoint for finding author by his name and surname.
 
 Example:
 ```http request 
-http://localhost:8080//authors?name=steven&surname=king 
+http://localhost:8080/api/authors?name=steven&surname=king 
 ```
 Response body:
 ```json
@@ -43,7 +49,7 @@ This request is case-insensitive, so you can write "Steven" or "steven", both ar
 Method to find book by its Id int DB. Example :
 ### Request:
 ```http request
-http://localhost:8080//books/3
+http://localhost:8080/api/books/3
 ```
 ### Response
 ```json
@@ -101,7 +107,7 @@ Requires body, contains name of book and its author :
 Method to find book by its Id int DB. Example :
 
 ```http request
-http://localhost:8080/books/5
+http://localhost:8080/api/books/5
 ```
 
 ```json
