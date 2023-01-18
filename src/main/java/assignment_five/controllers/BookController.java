@@ -51,7 +51,8 @@ public class BookController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody @NotNull @Valid final BookDto bookDto, BindingResult bindingResult) {
+    public void create(@RequestBody @NotNull @Valid final BookDto bookDto,
+                       final BindingResult bindingResult) {
         log.error(String.valueOf(bindingResult.hasErrors()));
         if (bindingResult.hasErrors()) {
             throw new BookValidationException(bindingResult);
@@ -60,7 +61,8 @@ public class BookController {
     }
 
     @PatchMapping("/update")
-    public void update(@RequestBody @NotNull @Valid final BookDto bookDto, BindingResult bindingResult) {
+    public void update(@RequestBody @NotNull @Valid final BookDto bookDto,
+                       final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new BookValidationException(bindingResult.getAllErrors().toString());
         }
@@ -68,7 +70,8 @@ public class BookController {
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody @NotNull @Valid final BookDto bookDto, BindingResult bindingResult) {
+    public void delete(@RequestBody @NotNull @Valid final BookDto bookDto,
+                       final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new BookValidationException(bindingResult.getAllErrors().toString());
         }

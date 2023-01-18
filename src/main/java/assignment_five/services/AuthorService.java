@@ -33,7 +33,7 @@ public class AuthorService implements CrudService<AuthorDto,Long> {
     }
     @Override
     public void save(AuthorDto dto) {
-        if (authorRepository.findByNameAndSurname(dto.getName(), dto.getSurname()).isPresent()) {
+        if (authorRepository.findByFullName(dto.getName(), dto.getSurname()).isPresent()) {
             throw new AuthorDuplicateException(format("Author[%s %s] already exists",
                     dto.getName(), dto.getSurname()));
         }

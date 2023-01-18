@@ -5,6 +5,7 @@ import assignment_five.entity.Author;
 import assignment_five.entity.dto.AuthorDto;
 import assignment_five.services.AuthorService;
 import assignment_five.services.repositories.AuthorRepository;
+import assignment_five.utils.exceptions.AuthorDuplicateException;
 import assignment_five.utils.exceptions.AuthorNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
@@ -66,5 +66,25 @@ class AuthorServiceTest {
                 .name("somename")
                 .surname("somesurname").build());
         assertEquals(result.get(), author);
+    }
+
+    @Test
+    void testSavingEntitiesThatPresent() {
+        final Author author = new Author();
+        final AuthorDto authorDto = AuthorDto.builder()
+                .name("somename")
+                .surname("somesurname").build();
+        when(authorRepository.findByFullName(anyString(), anyString()))
+                .thenReturn(Optional.of(author));
+        assertThrows(AuthorDuplicateException.class, ()-> authorService.save(authorDto));
+    }
+    @Test
+    void testSavingEntitiesThatNotPresent() {
+        final AuthorDto authorDto = AuthorDto.builder()
+                .name("somename")
+                .surname("somesurname").build();
+        when(authorRepository.findByFullName(anyString(), anyString()))
+                .thenReturn(Optional.empty());
+        assertDoesNotThrow(()-> authorService.save(authorDto));
     }
 }
