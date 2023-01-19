@@ -17,8 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 
@@ -61,6 +60,7 @@ class BookServiceTest {
 
         when(bookRepository.findByNameAndAuthorName(anyString(),anyString(),anyString()))
                 .thenReturn(Optional.of(book));
+        when(bookRepository.save(any(Book.class))).thenReturn(null);
 
         assertThrows(BookDuplicateException.class, () -> bookService.save(existingBook));
     }
@@ -72,6 +72,7 @@ class BookServiceTest {
         when(bookRepository.findByNameAndAuthorName(anyString(), anyString(), anyString()))
                 .thenReturn(Optional.empty());
         when(authorService.findAuthor(mockBook)).thenReturn(Optional.of(author));
+        when(bookRepository.save(any(Book.class))).thenReturn(null);
 
         assertDoesNotThrow(() -> bookService.save(mockAuthor));
     }

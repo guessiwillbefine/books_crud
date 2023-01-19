@@ -2,6 +2,7 @@ package assignment_five;
 
 
 import assignment_five.entity.Author;
+import assignment_five.entity.Book;
 import assignment_five.entity.dto.AuthorDto;
 import assignment_five.services.AuthorService;
 import assignment_five.services.repositories.AuthorRepository;
@@ -74,6 +75,7 @@ class AuthorServiceTest {
                 .surname("somesurname").build();
         when(authorRepository.findByFullName(anyString(), anyString()))
                 .thenReturn(Optional.of(author));
+        when(authorRepository.save(any(Author.class))).thenReturn(null);
         assertThrows(AuthorDuplicateException.class, () -> authorService.save(authorDto));
     }
 
@@ -84,6 +86,8 @@ class AuthorServiceTest {
                 .surname("somesurname").build();
         when(authorRepository.findByFullName(anyString(), anyString()))
                 .thenReturn(Optional.empty());
+        when(authorRepository.save(any(Author.class))).thenReturn(null);
+
         assertDoesNotThrow(() -> authorService.save(authorDto));
     }
 }
