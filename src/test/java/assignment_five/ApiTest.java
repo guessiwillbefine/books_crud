@@ -4,7 +4,7 @@ import assignment_five.entity.dto.AuthorDto;
 import assignment_five.entity.dto.BookDto;
 import assignment_five.entity.dto.SearchRequestDto;
 import assignment_five.entity.dto.SearchRequestDto.Param;
-import assignment_five.services.repositories.BookRepository;
+import assignment_five.utils.ApplicationConstants;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -65,8 +65,6 @@ class ApiTest {
             List.of(
                     new Param("some trash", "Gunslinger"),
                     new Param("what?", "¯\\_(ツ)_/¯")));
-    @Autowired
-    private BookRepository bookRepository;
 
     @Test
     @DisplayName("test searching by valid Book entity fields")
@@ -278,8 +276,8 @@ class ApiTest {
     @DisplayName("test book pageable")
     void getByIdShouldReturnBookDto() throws Exception {
         final Random random = new Random();
-        final String size = String.valueOf(random.nextInt(5));
-        final String page = String.valueOf(random.nextInt(3));
+        final String size = String.valueOf(random.nextInt(1,5));
+        final String page = String.valueOf(random.nextInt(1,3));
 
         final var response = mockMvc.perform(get("/books/all").param("size", size)
                         .param("page", page))
@@ -289,5 +287,14 @@ class ApiTest {
         final var bookDtoList = mapper.readValue(responseBody, List.class);
         assertNotNull(bookDtoList);
         assertEquals(Integer.parseInt(size), bookDtoList.size());
+
+
+        final var response2 = mockMvc.perform(get("/books/all"))
+                .andExpect(status().isOk())
+                .andReturn();
+        final String responseBody2 = response2.getResponse().getContentAsString();
+        final var bookDtoList2 = mapper.readValue(responseBody2, List.class);
+        assertNotNull(bookDtoList2);
+        assertEquals(ApplicationConstants.Pageable.DEFAULT_PAGE_SIZE, bookDtoList2.size());
     }
 }

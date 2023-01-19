@@ -133,7 +133,7 @@ public class BookService implements CrudService<BookDto, Long> {
 
     private Pageable buildPageRequest(Integer pageSize, Integer pageNum) {
         int size = (pageSize == null || pageSize == 0) ? ApplicationConstants.Pageable.DEFAULT_PAGE_SIZE : pageSize;
-        int page = (pageNum < 0) ? ApplicationConstants.Pageable.DEFAULT_PAGE : pageNum;
+        int page = (pageNum == null || pageNum < 0) ? ApplicationConstants.Pageable.DEFAULT_PAGE : pageNum;
         return PageRequest.of(page, size);
     }
 }
