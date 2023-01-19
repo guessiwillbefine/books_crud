@@ -4,7 +4,6 @@ import assignment_five.entity.dto.AuthorDto;
 import assignment_five.entity.dto.BookDto;
 import assignment_five.entity.dto.SearchRequestDto;
 import assignment_five.entity.dto.SearchRequestDto.Param;
-import assignment_five.services.repositories.BookRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -65,8 +64,6 @@ class ApiTest {
             List.of(
                     new Param("some trash", "Gunslinger"),
                     new Param("what?", "¯\\_(ツ)_/¯")));
-    @Autowired
-    private BookRepository bookRepository;
 
     @Test
     @DisplayName("test searching by valid Book entity fields")
@@ -278,8 +275,8 @@ class ApiTest {
     @DisplayName("test book pageable")
     void getByIdShouldReturnBookDto() throws Exception {
         final Random random = new Random();
-        final String size = String.valueOf(random.nextInt(5));
-        final String page = String.valueOf(random.nextInt(3));
+        final String size = String.valueOf(random.nextInt(1,5));
+        final String page = String.valueOf(random.nextInt(1,3));
 
         final var response = mockMvc.perform(get("/books/all").param("size", size)
                         .param("page", page))
