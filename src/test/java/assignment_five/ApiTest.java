@@ -4,6 +4,7 @@ import assignment_five.entity.dto.AuthorDto;
 import assignment_five.entity.dto.BookDto;
 import assignment_five.entity.dto.SearchRequestDto;
 import assignment_five.entity.dto.SearchRequestDto.Param;
+import assignment_five.services.repositories.BookRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -63,6 +65,8 @@ class ApiTest {
             List.of(
                     new Param("some trash", "Gunslinger"),
                     new Param("what?", "¯\\_(ツ)_/¯")));
+    @Autowired
+    private BookRepository bookRepository;
 
     @Test
     @DisplayName("test searching by valid Book entity fields")
@@ -271,15 +275,19 @@ class ApiTest {
     }
 
     @Test
-    @DisplayName("getting all authors test")
+    @DisplayName("test book pageable")
     void getByIdShouldReturnBookDto() throws Exception {
-        final var response = mockMvc.perform(get("/books/1"))
+        final Random random = new Random();
+        final String size = String.valueOf(random.nextInt(5));
+        final String page = String.valueOf(random.nextInt(3));
+
+        final var response = mockMvc.perform(get("/books/all").param("size", size)
+                        .param("page", page))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("name").exists())
-                .andExpect(jsonPath("description").exists())
                 .andReturn();
         final String responseBody = response.getResponse().getContentAsString();
-        final var BookDtoList = mapper.readValue(responseBody, BookDto.class);
-        assertNotNull(BookDtoList);
+        final var bookDtoList = mapper.readValue(responseBody, List.class);
+        assertNotNull(bookDtoList);
+        assertEquals(Integer.parseInt(size), bookDtoList.size());
     }
 }
